@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="./style1.css">
+  <title>Deutsche Bahn Abfahrtzeiten</title>
+ 
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</head>
+<body>
+ 
+  <!-- HEADER -->
+  <header class="bg-dark text-white text-center p-3 position-relative">
+    <h1>Abfahrtzeiten</h1>
+    <img src="db-logo.png" alt="DB Logo" class="position-absolute top-0 end-0 m-3" style="height: 40px;">
+   
+    <!-- Zurück-Button -->
+    <button id="zurueckBtn" onclick="zeigeHauptmenue()" class="btn btn-light position-absolute top-0 start-0 m-3" style="display: none;">
+      Zurück
+    </button>
+  </header>
+ 
+  <!-- HAUPTMENÜ -->
+  <div id="hauptmenue" class="d-flex flex-column align-items-center justify-content-center text-center" style="height: 90vh;">
+    <h2>Willkommen bei der Bahn-Auskunft</h2>
+    <p>Wählen Sie eine Option:</p>
+    <button onclick="zeigeAbfahrten()" class="btn btn-primary mt-3">Abfahrtzeiten anzeigen</button>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    let abfahrtsTabelle = `<div id="abfahrtbereich" style="display: none;"> 
+    <div class="container my-5">
+      <div class="mb-4">
+        <input id="cityInput" onchange="ladeDaten()">
+      </div>
+ 
+      <table id="abfahrtsTabelle" class="table table-striped table-bordered">
+        <thead class="table-light">
+          <tr>
+            <th>Zeit</th>
+            <th>Ziel</th>
+            <th>Gleis</th>
+            <th>Zugtyp</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="tabelleInhalt">
+          <!-- Dynamisch gefüllt -->
+        </tbody>
+      </table>
+    </div>
+  </div>`
+    const datenBerlin = [
+      { zeit: "08:00", ziel: "München", gleis: "5", typ: "ICE", status: "Pünktlich" },
+      { zeit: "08:30", ziel: "Frankfurt", gleis: "3", typ: "IC", status: "Verspätet" },
+      { zeit: "09:00", ziel: "Leipzig", gleis: "2", typ: "RE", status: "Pünktlich" },
+      { zeit: "09:30", ziel: "Dresden", gleis: "1", typ: "ICE", status: "Fällt aus" },
+      { zeit: "10:00", ziel: "Stuttgart", gleis: "6", typ: "IC", status: "Pünktlich" },
+      { zeit: "10:30", ziel: "Hannover", gleis: "4", typ: "RE", status: "Verspätet" },
+      { zeit: "11:00", ziel: "Köln", gleis: "7", typ: "ICE", status: "Pünktlich" },
+      { zeit: "11:30", ziel: "Nürnberg", gleis: "2", typ: "IC", status: "Pünktlich" },
+      { zeit: "12:00", ziel: "Bremen", gleis: "8", typ: "RE", status: "Verspätet" },
+      { zeit: "12:30", ziel: "Essen", gleis: "5", typ: "ICE", status: "Pünktlich" }
+    ];
+ 
+    const datenHamburg = [
+      { zeit: "07:00", ziel: "Kiel", gleis: "1", typ: "RE", status: "Pünktlich" },
+      { zeit: "07:30", ziel: "Lübeck", gleis: "2", typ: "RE", status: "Verspätet" },
+      { zeit: "08:00", ziel: "Berlin", gleis: "3", typ: "ICE", status: "Pünktlich" },
+      { zeit: "08:30", ziel: "Hannover", gleis: "4", typ: "IC", status: "Fällt aus" },
+      { zeit: "09:00", ziel: "Bremen", gleis: "5", typ: "RE", status: "Pünktlich" },
+      { zeit: "09:30", ziel: "Osnabrück", gleis: "6", typ: "ICE", status: "Pünktlich" },
+      { zeit: "10:00", ziel: "München", gleis: "7", typ: "IC", status: "Verspätet" },
+      { zeit: "10:30", ziel: "Düsseldorf", gleis: "8", typ: "RE", status: "Pünktlich" },
+      { zeit: "11:00", ziel: "Stuttgart", gleis: "9", typ: "ICE", status: "Pünktlich" },
+      { zeit: "11:30", ziel: "Mainz", gleis: "10", typ: "IC", status: "Verspätet" }
+    ];
+
+    document.getElementById('cityInput').change
+ 
+    function ladeDaten() {
+      const stadt = document.getElementById('cityInput').value;
+      let daten = stadt.toString().toLowerCase() === "berlin" ? datenBerlin : datenHamburg;
+      const tbody = document.getElementById("tabelleInhalt");
+      tbody.innerHTML = "";
+ 
+      daten.forEach(eintrag => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${eintrag.zeit}</td>
+          <td>${eintrag.ziel}</td>
+          <td>${eintrag.gleis}</td>
+          <td>${eintrag.typ}</td>
+          <td>${eintrag.status}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+ 
+    function zeigeAbfahrten() {
+      document.getElementById("hauptmenue").innerHTML = abfahrtsTabelle
+      document.getElementById("abfahrtbereich").style.display = "block";
+      document.getElementById("zurueckBtn").style.display = "inline-block";
+    }
+ 
+    function zeigeHauptmenue() {
+      document.getElementById("abfahrtbereich").style.display = "none";
+      document.getElementById("hauptmenue").innerHTML = `<h2>Willkommen bei der Bahn-Auskunft</h2> <p>Wählen Sie eine Option:</p> <button onclick="zeigeAbfahrten()" class="btn btn-primary mt-3">Abfahrtzeiten anzeigen</button>`;
+      document.getElementById("zurueckBtn").style.display = "none";
+    }
+ 
+    // Seite starten im Menü-Modus
+    window.onload = () => {
+      zeigeHauptmenue();
+    };
+  </script>
+ 
+</body>
+</html>
