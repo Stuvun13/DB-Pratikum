@@ -1,0 +1,109 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+ 
+body {
+  font-family: Arial, sans-serif;
+  background: #fff;
+  color: #222;
+  line-height: 1.5;
+}
+ 
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 0 15px;
+}
+ 
+/* Header */
+header {
+  background-color: black;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+ 
+header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+}
+ 
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+ 
+#nav-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  display: none;
+}
+ 
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+ 
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}
+ 
+nav a:hover,
+nav a:focus {
+  text-decoration: underline;
+  outline: none;
+}
+ 
+/* Responsive Navigation */
+@media (max-width: 768px) {
+  #nav-toggle {
+    display: block;
+  }
+  nav {
+    position: absolute;
+    top: 60px;
+    right: 15px;
+    background: black;
+    border: 1px solid #444;
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    width: 150px;
+  }
+  nav.open {
+    display: flex;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+ 
+.btn-rounded-bottom {
+  border-radius: 0 0 12px 12px; /* Unten abgerundet */
+  font-weight: 700;             /* Dicker Text */
+  color: white !important;      /* Weiße Schrift (wichtig für Bootstrap Overrides) */
+  background-color: #ff002b;    /* Optional: Bootstrap Primary Color */
+  border: none;                 /* Optional: kein Rahmen */
+  padding: 0.5rem 1rem;         /* Angenehme Padding */
+  cursor: pointer;              /* Pointer Cursor */
+  transition: background-color 0.3s ease;
+}
+ 
+.btn-rounded-bottom:hover {
+  background-color: #b30000;    /* Dunklerer Hintergrund bei Hover */
+  color: white !important;
+}
+ 
