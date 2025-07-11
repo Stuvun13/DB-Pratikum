@@ -134,7 +134,32 @@
                 .catch(error => console.error(error));
         };
     });
- 
+
+
+//IDsuche ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+  const stationInfoName = "S+U Berlin Hauptbahnhof"; // z. B. beliebiger Stationsname
+  function getStationIdByName(name) {
+     const stationID =  undefined
+    fetch(`https://v6.vbb.transport.rest/locations?poi=false&addresses=false&query=${encodeURIComponent(name)}`)
+      .then(response => response.json())
+      .then(data => {
+        const station = data.find(item => item.name === name);
+
+        if (station) {
+          stationID = (`${station.id}`);
+        } else {
+          console.warn(`Keine Station mit dem Namen "${name}" gefunden.`);
+        }
+      })
+      .catch(error => {
+        console.error("Fehler beim Abrufen der Stationsdaten:", error);
+      });
+      return stationID
+  }
+
+  // Starte die Suche direkt
+  getStationIdByName(stationInfoName);
+
 </script>
  
   </body>
