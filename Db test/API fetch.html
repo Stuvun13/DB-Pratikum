@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <p id="fetch"></p>
+  <script>
+    fetch('https://v6.vbb.transport.rest/stops/900013102/departures?direction=900014101&duration=10')
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.error(error));
+  </script>  
+</body>
+</html>
