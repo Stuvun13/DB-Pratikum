@@ -67,13 +67,16 @@
 
 <!-- Karte ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <section id="Verbindungen" class="my-5">
-  <h2>Verbindungen:</h2>
+  <h2>Verbindungen Berlin-Brandenburg:</h2>
   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1244888.7789347516!2d11.696906843658505!3d52.45335913655563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a84fede87c369b%3A0x8122269c3452df8c!2sBrandenburg!5e0!3m2!1sde!2sde!4v1752227942499!5m2!1sde!2sde" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></section>
 </section>
 
 <script>
+
   function initMap() {
+
     const centerMap = { lat: 52.45335913655563, lng: 11.696906843658505 }
+
     const mapOptions = {
         center: centerMap,
         zoom: 20,
@@ -81,25 +84,24 @@
   }
 
     const map = new google.maps.Map(document.getElementbyId('google-map'), mapOptions);
+
   }
 </script>
 
 <!-- Leer ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <section id="Tickets" class="my-5">
-  <h2>PLATZHALTER:</h2>
-  <p>
-    PLATZHALTER
-  </p>
+  <h2>Tickets:</h2>
+  <p>PLATZHALTER</p>
 </section>
 
 <section id="Einstellungen" class="my-5">
   <h2>Einstellungen:</h2>
-  <p>
-    PLATZHALTER
-  </p>
+  <p>PLATZHALTER</p>
 </section>
+
 <!-- Script ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
   <script>
+
 //Tabelle ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     let zeitAPI = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
     let zielAPI = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
@@ -131,11 +133,12 @@
 
 
  
-    //EINZELNER ZUGRIFF--->
+//EINZELNER ZUGRIFF--->
     const spalte = undefined
     const reihe = undefined
     daten[reihe].spalte = undefined;
     document.getElementById((spalte)+(reihe)).innerText = daten[reihe].spalte;
+
 //Textsuche ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     function stationSearch(data) {
       let ol = document.getElementById('stationsName');
@@ -161,7 +164,8 @@
  
   </body>
 <script>
- document.getElementById("btnAbfahrt").addEventListener("click", function() {
+ document.getElementById("btnAbfahrt").addEventListener("click", function()
+
   // Das Ziel-Element mit der Abfahrts-Tabelle holen:
   const abfahrtbereich = document.getElementById("abfahrtbereich");
   if (abfahrtbereich) {
