@@ -116,14 +116,6 @@
       `;
       tabelle.appendChild(tr);
     });
-
-
- 
-    //EINZELNER ZUGRIFF--->
-    const spalte = undefined
-    const reihe = undefined
-    daten[reihe].spalte = undefined;
-    document.getElementById((spalte)+(reihe)).innerText = daten[reihe].spalte;
 //Textsuche ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     function stationSearch(data) {
       let ol = document.getElementById('stationsName');
@@ -140,8 +132,6 @@
                 .then(response => response.json())
                 .then(data => stationSearch(data))
                 .catch(error => console.error(error));
-        } else {
-          document.getElementById('stationName') = innerHTML('')
         };
     });
  
