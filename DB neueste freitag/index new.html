@@ -68,9 +68,21 @@
 <!-- Karte ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <section id="Verbindungen" class="my-5">
   <h2>Verbindungen:</h2>
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6144852.754419821!2d5.176434512432731!3d51.06378036360403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479a721ec2b1be6b%3A0x75e85d6b8e91e55b!2sDeutschland!5e1!3m2!1sde!2sde!4v1752147817624!5m2!1sde!2sde" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1244888.7789347516!2d11.696906843658505!3d52.45335913655563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a84fede87c369b%3A0x8122269c3452df8c!2sBrandenburg!5e0!3m2!1sde!2sde!4v1752227942499!5m2!1sde!2sde" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></section>
 </section>
 
+<script>
+  function initMap() {
+    const centerMap = { lat: 52.45335913655563, lng: 11.696906843658505 }
+    const mapOptions = {
+        center: centerMap,
+        zoom: 20,
+        disableDefaultUI: true
+  }
+
+    const map = new google.maps.Map(document.getElementbyId('google-map'), mapOptions);
+  }
+</script>
 
 <!-- Leer ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <section id="Tickets" class="my-5">
