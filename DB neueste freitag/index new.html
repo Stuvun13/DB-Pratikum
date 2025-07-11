@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="./style_new.css">
     <title>Deutsche Bahn Abfahrtzeiten</title>
  
-    <!-- Bootstrap ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!-- Bootstrap ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
@@ -99,10 +99,8 @@
   <p>PLATZHALTER</p>
 </section>
 
-<!-- Script ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-  <script>
-
-//Tabelle ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<!-- Tabelle ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<script>
     let zeitAPI = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
     let zielAPI = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
     let gleisAPI = ["z", "y", "x", "w", "v", "u", "t", "s", "r", "q"];
@@ -131,9 +129,7 @@
       tabelle.appendChild(tr);
     });
 
-
- 
-//EINZELNER ZUGRIFF--->
+//einzelner Zugriff---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     const spalte = undefined
     const reihe = undefined
     daten[reihe].spalte = undefined;
@@ -164,14 +160,14 @@
  
   </body>
 <script>
- document.getElementById("btnAbfahrt").addEventListener("click", function()
+ document.getElementById("btnAbfahrt").addEventListener ("click", function(){}); 
 
-  // Das Ziel-Element mit der Abfahrts-Tabelle holen:
-  const abfahrtbereich = document.getElementById("abfahrtbereich");
+//Ziel-Element mit der Abfahrts-Tabelle holen ------------------------------------------------------------------------------------------------------------------------------------------------>
+  const abfahrtbereich = document.getElementById("abfahrtbereich"); {
   if (abfahrtbereich) {
     abfahrtbereich.scrollIntoView({ behavior: "smooth" });
   }
-});
+};
     </script>
  
   </body>
