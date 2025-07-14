@@ -155,12 +155,12 @@
       });
   }
 
-async function stationIDbyName() {
+async function main() {
   const stationID = await getStationIdByName(stationInfoName);
-  return stationID;
+  console.log(stationID);
 }
 
-console.log(stationIDbyName());
+main();
 
 </script>
  
