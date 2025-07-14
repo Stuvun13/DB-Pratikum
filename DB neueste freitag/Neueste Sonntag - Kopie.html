@@ -84,7 +84,7 @@
   <h2>Verbindungen:</h2>
   <div class="container my-5" id="abfahrtbereich">
     <input id="stationInput">
-    <a><ol id="stationsName" id="abfahrtbereich" class="mb-4"></ol></a>
+    <ol id="stationsName" id="abfahrtbereich" class="mb-4"></ol>
       <table class="table table-striped table-bordered">
         <thead class="table-light">
             <tr>
@@ -147,6 +147,7 @@
         li.appendChild(document.createTextNode(element.name));
         ol.appendChild(li);
       });
+      /*document.getElementById('stationsName').addEventListener('click', (event) =>{data.forEach((element)=>{console.log(element.name)})})*/
     }
     document.getElementById('stationInput').addEventListener('input', (event) => {
         if ('stationInput' != '') {
@@ -159,7 +160,7 @@
 
 
 //IDsuche --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-  const stationInfoName = "S Bornholmer Str. (Berlin)" //beliebiger Stationsname
+  const stationInfoName = "S+U Berlin Hauptbahnhof" //beliebiger Stationsname
 
   async function getStationIdByName(name) {
       return await fetch(`https://v6.vbb.transport.rest/locations?poi=false&addresses=false&query=${encodeURIComponent(name)}`)
@@ -182,7 +183,6 @@ function renderTable(data) {
   const tabelle = document.getElementById("tabelleInhalt");
 
   data.arrivals.forEach((element, i) => {
-    console.log(element)
     const tr = document.createElement("tr");
     let plannedWhenVariable = new Date(element.plannedWhen);
     tr.innerHTML = `
