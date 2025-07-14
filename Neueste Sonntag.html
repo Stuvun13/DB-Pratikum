@@ -2,12 +2,11 @@
 <html lang="de">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="./style_new.css">
+    <link rel="stylesheet" href="./style_new.css" type="text/css"/>
     <title>Deutsche Bahn Abfahrtzeiten</title>
  
     <!-- Bootstrap ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css" />
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
   </head>
   <body>
@@ -82,9 +81,12 @@
 <!-- Tabelle --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
 <section id="abfahrtbereich" class="my-5">
   <h2>Verbindungen:</h2>
-  <div class="container my-5" id="abfahrtbereich">
-    <input id="stationInput">
-    <ol id="stationsName" id="abfahrtbereich" class="mb-4"><a></a></ol>
+  <div class="container my-5" class = "table-search-div" id="abfahrtbereich">
+    <div class = 'search-div'>
+      <input id="stationInput" type="text" class="form-control">
+      <ol id = "stationsName" id="abfahrtbereich" class="mb-4"></ol>
+    </div>
+    <div class = "table-div">
       <table class="table table-striped table-bordered">
         <thead class="table-light">
             <tr>
@@ -94,6 +96,7 @@
         </thead>
       </table>
     </div>
+  </div>
 </section>
 <br>
 <br>
@@ -137,16 +140,19 @@
   </p>
 </section>
 <!-- Script ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-  <script>
+  <script type="text/javascript">
 //Textsuche -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     function stationSearch(data) {
       let ol = document.getElementById('stationsName');
       ol.innerHTML = '';
       data.forEach((element) => {
         let li = document.createElement('li');
+        li.dataset.id = element.id;
+        li.className = 'stationItem';
         li.appendChild(document.createTextNode(element.name));
         ol.appendChild(li);
       });
+      document.querySelectorAll('.stationItem').forEach(element => element.addEventListener('click', function() {stationInfoSearch(element.dataset.id), (document.getElementById('stationsName').innerHTML = null), (document.getElementById('stationInput').value = element.name)}));
     }
     document.getElementById('stationInput').addEventListener('input', (event) => {
         if ('stationInput' != '') {
@@ -157,55 +163,31 @@
         };
     });
 
-
-//IDsuche --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-  const stationInfoName = document.getElementById("stationInput").value //beliebiger Stationsname
-
-  async function getStationIdByName(name) {
-      return await fetch(`https://v6.vbb.transport.rest/locations?poi=false&addresses=false&query=${encodeURIComponent(name)}`)
-      .then(response => response.json())
-      .then(data => {
-        const station = data.find(item => item.name === name);
-
-        if (station) {
-          return station.id
-        } else {
-          console.warn(`Keine Station mit dem Namen "${name}" gefunden.`);
-        }
-      })
-      .catch(error => {
-        console.error("Fehler beim Abrufen der Stationsdaten:", error);
-      });
-  }
-
 function renderTable(data) {
   const tabelle = document.getElementById("tabelleInhalt");
 
   data.arrivals.forEach((element, i) => {
-    console.log(element)
     const tr = document.createElement("tr");
+    tr.className = 'tableInfoId';
+    let plannedWhenVariable = new Date(element.plannedWhen);
     tr.innerHTML = `
       <td id="zug${i+1}">${element.line.name}</td>
-      <td id="zeit${i+1}">${element.plannedWhen}</td>
+      <td id="zeit${i+1}">${plannedWhenVariable.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</td>
       <td id="ziel${i+1}">${element.provenance}</td>
-      <td id="gleis${i+1}">${element.plannedPlatform}</td>
-      <td id="typ${i+1}">${element.line.productName}</td>
-      <td id="status${i+1}" class="">${element.delay ?? 0}</td>
+      <td id="gleis${i+1}">${element.provenance}</td>
+      <td id="typ${i+1}">${element.plannedPlatform ?? 0}</td>
+      <td id="status${i+1}" class="">${(element.delay)/60 ?? 0} Minuten </td>
     `;
     tabelle.appendChild(tr);
   });
-
-  //if ((zugAPI = "") && (zeitAPI = "") && (zielAPI = "") && (gleisAPI = "") && (typAPI = "") && (statusAPI = ""))
-    //document.getElementById("tabelleErsteZeile").inneHTL = ""
-
-    console.log(data.arriavls[0].plannedWhen)
 }
-//Tabelle --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
-async function stationIDbyName() {
 
+//Tabelle --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+function stationInfoSearch(id) {
+    const tabelle = document.getElementById("tabelleInhalt");
+    tabelle.innerHTML = '';
 //IDsuche
-  const stationID = await getStationIdByName(stationInfoName);  
-  fetch(`https://v6.vbb.transport.rest/stops/${stationID}/arrivals?duration=10`)
+  fetch(`https://v6.vbb.transport.rest/stops/${id}/arrivals?duration=10`)
       .then(response => response.json())
       .then(data => renderTable(data))
       .catch(error => {
@@ -213,12 +195,10 @@ async function stationIDbyName() {
       });
 
 }
-stationIDbyName();
 
 </script>
- 
-  </body>
-<script>
+
+<script type="text/javascript">
 //Einstellungsbutton ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
  document.getElementById("btnAbfahrt").addEventListener("click", function() {
   // Das Ziel-Element mit der Abfahrts-Tabelle holen:
