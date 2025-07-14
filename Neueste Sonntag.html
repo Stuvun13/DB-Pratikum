@@ -152,7 +152,7 @@
         li.appendChild(document.createTextNode(element.name));
         ol.appendChild(li);
       });
-      document.querySelectorAll('.stationItem').forEach(element => element.addEventListener('click', function() {stationInfoSearch(element.dataset.id), (document.getElementById('stationsName').innerHTML = null), (document.getElementById('stationInput').value = element.name)}));
+      document.querySelectorAll('.stationItem').forEach(element => element.addEventListener('click', function() {stationInfoSearch(element.dataset.id), (document.getElementById('stationsName').innerHTML = null)}));
     }
     document.getElementById('stationInput').addEventListener('input', (event) => {
         if ('stationInput' != '') {
