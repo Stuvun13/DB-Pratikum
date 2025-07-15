@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./style_new.css" type="text/css"/>
+    <title>Deutsche Bahn Abfahrtzeiten</title>
+ 
+    <!-- Bootstrap ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+  </head>
+  <body>
+ <!-- Header -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+    <header>
+  <div class="container">
+    <h1 class="logo">Deutsche Bahn</h1>
+    <button type="button" class="btn btn-danger" id="nav-toggle" aria-label="Navigation öffnen"></button>
+    <nav id="nav-menu" aria-label="Hauptnavigation"> 
+      <ul> 
+        <li><a href="#hauptmenu">Hauptmenü</a></li>
+        <li><a href="#abfahrtbereich">Bahnhofssuche</a></li>
+        <li><a href="#Tickets">Verbindungen</a></li>
+        <li><a href="#Service">Tickets</a></li>
+       <button id="settings-button" aria-label="Einstellungen öffnen" title="Einstellungen öffnen">
+  <!-- Zahnrad-Icon als SVG -->
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path d="M19.14,12.94c0.04,-0.3 0.06,-0.61 0.06,-0.94c0,-0.33 -0.02,-0.64 -0.07,-0.94l2.03,-1.58c0.18,-0.14 0.23,-0.41 0.12,-0.61l-1.92,-3.32c-0.11,-0.2 -0.36,-0.28 -0.57,-0.22l-2.39,0.96c-0.5,-0.38 -1.04,-0.7 -1.64,-0.94l-0.36,-2.54c-0.03,-0.22 -0.22,-0.39 -0.44,-0.39h-3.84c-0.22,0 -0.41,0.17 -0.44,0.39l-0.36,2.54c-0.6,0.24 -1.14,0.56 -1.64,0.94l-2.39,-0.96c-0.21,-0.08 -0.46,0.02 -0.57,0.22l-1.92,3.32c-0.11,0.2 -0.06,0.46 0.12,0.61l2.03,1.58c-0.05,0.3 -0.07,0.61 -0.07,0.94c0,0.33 0.02,0.64 0.07,0.94l-2.03,1.58c-0.18,0.14 -0.23,0.41 -0.12,0.61l1.92,3.32c0.11,0.2 0.36,0.28 0.57,0.22l2.39,-0.96c0.5,0.38 1.04,0.7 1.64,0.94l0.36,2.54c0.03,0.22 0.22,0.39 0.44,0.39h3.84c0.22,0 0.41,-0.17 0.44,-0.39l0.36,-2.54c0.6,-0.24 1.14,-0.56 1.64,-0.94l2.39,0.96c0.21,0.08 0.46,-0.02 0.57,-0.22l1.92,-3.32c0.11,-0.2 0.06,-0.46 -0.12,-0.61l-2.03,-1.58Zm-7.14,2.06c-1.66,0 -3,-1.34 -3,-3c0,-1.66 1.34,-3 3,-3c1.66,0 3,1.34 3,3c0,1.66 -1.34,3 -3,3Z"/>
+  </svg>
+</button>  
+    </nav>
+  </div>
+  <img  src="https://loghi-famosi.com/wp-content/uploads/2021/03/Logo-della-Deutsche-Bahn-650x366.png"  alt="Deutsche Bahn Logo" style="position: absolute; top: 10px; right: 20px; height: 55px;">
+</header>
+     
+ 
+<!-- Hauptmenü mit Hintergrundbild ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<section id="hauptmenu" class="position-relative text-white d-flex align-items-center" style="
+  height: 800px;
+  background: url('https://tse1.mm.bing.net/th/id/OIP.oUYjDywDXEK6ylIQUJYOCgHaEc?rs=1&pid=ImgDetMain&o=7&rm=3') center center/cover no-repeat;
+">
+  <!-- Overlay für dunklen Effekt (optional für bessere Lesbarkeit) -->
+  <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0,0,0,0.5);"></div>
+ 
+  <!-- Inhalt zentriert -->
+  <div class="container position-relative text-center">
+    <div class="bg-dark bg-opacity-75 p-4 rounded">
+      <h1 class="mb-3">Willkommen zu den Abfahrtszeiten</h1>
+      <p class="mb-4 fs-5">Plane deine Reise mit aktuellen Zugabfahrten</p>
+      <button id="btnAbfahrt" class="button-db">Abfahrtzeiten anzeigen</button>
+    </div>
+  </div>
+</section>
+<hr>
+
+<!---einstellungs Popup-->
+<div id="settings-popup" aria-hidden="true" role="dialog" aria-label="Einstellungen">
+  <br><br> <br> 
+  <button class="close-btn" aria-label="Einstellungen schließen">&times;</button>
+ <hr>
+  <div class="setting">
+    <div class="setting-label">Funktion A</div>
+    <div class="toggle-button" data-setting="funktionA" tabindex="0">1</div>
+  </div>
+
+  <div class="setting">
+    <div class="setting-label">Funktion B</div>
+    <div class="toggle-button" data-setting="funktionB" tabindex="0">1</div>
+  </div>
+  <div class="setting">
+    <div class="setting-label">Funktion A</div>
+    <div class="toggle-button" data-setting="funktionA" tabindex="0">1</div>
+  </div>
+
+  <div class="setting">
+    <div class="setting-label">Funktion B</div>
+    <div class="toggle-button" data-setting="funktionB" tabindex="0">1</div>
+  </div>
+</div>
+
+<!-- Tabelle --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<section id="abfahrtbereich" class="my-5">
+  <h2>Verbindungen:</h2>
+  <div class="container my-5" class = "table-search-div" id="abfahrtbereich">
+    <div class = 'search-div'>
+      <input id="stationInput" type="text" class="form-control">
+      <ol id = "stationsName" id="abfahrtbereich" class="mb-4"></ol>
+    </div>
+    <div class = "table-div">
+      <table class="table table-striped table-bordered">
+        <thead class="table-light">
+            <tr>
+              <th>Bahnlinie</th><th>Anknuft</th><th>Abfahrt</th><th>Richtung</th><th>Gleis</th><th>Verspätung</th>
+            </tr>
+          <tbody id="tabelleInhalt"></tbody>
+        </thead>
+      </table>
+    </div>
+  </div>
+</section>
+<br>
+<br>
+
+<!-- Karte ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<section id="Verbindungen" class="my-5">
+  <h2>Verbindungen Berlin-Brandenburg:</h2>
+  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1244888.7789347516!2d11.696906843658505!3d52.45335913655563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a84fede87c369b%3A0x8122269c3452df8c!2sBrandenburg!5e0!3m2!1sde!2sde!4v1752227942499!5m2!1sde!2sde" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></section>
+</section>
+
+<script>
+
+  function initMap() {
+
+    const centerMap = { lat: 52.45335913655563, lng: 11.696906843658505 }
+
+    const mapOptions = {
+        center: centerMap,
+        zoom: 20,
+        disableDefaultUI: true
+  }
+
+    const map = new google.maps.Map(document.getElementbyId('google-map'), mapOptions);
+
+  }
+</script>
+
+
+<!-- Leer ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<section id="Tickets" class="my-5">
+  <h2>PLATZHALTER:</h2>
+  <p>
+    PLATZHALTER
+  </p>
+</section>
+
+<section id="Einstellungen" class="my-5">
+  <h2>Einstellungen:</h2>
+  <p>
+    PLATZHALTER
+  </p>
+</section>
+<!-- Script ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+  <script type="text/javascript">
+//Textsuche -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    function stationSearch(data) {
+      let ol = document.getElementById('stationsName');
+      ol.innerHTML = '';
+      data.forEach((element) => {
+        let li = document.createElement('li');
+        li.dataset.id = element.id;
+        li.className = 'stationItem';
+        li.appendChild(document.createTextNode(element.name));
+        ol.appendChild(li);
+      });
+      document.querySelectorAll('.stationItem').forEach(element => element.addEventListener('click', function() {stationInfoSearch(element.dataset.id), (document.getElementById('stationsName').innerHTML = null)}));
+    }
+    document.getElementById('stationInput').addEventListener('input', (event) => {
+        if ('stationInput' != '') {
+            fetch(("https://v6.vbb.transport.rest/locations?poi=false&addresses=false&query=") + (event.target.value))
+                .then(response => response.json())
+                .then(data => stationSearch(data))
+                .catch(error => console.error(error));
+        };
+    });
+
+function renderTable(data) {
+  const tabelle = document.getElementById("tabelleInhalt");
+
+  data.arrivals.forEach((element, i) => {
+    const tr = document.createElement("tr");
+    tr.className = 'tableInfoId';
+    let plannedWhenVariable = new Date(element.plannedWhen);
+    tr.innerHTML = `
+      <td id="zug${i+1}">${element.line.name}</td>
+      <td id="zeit${i+1}">${plannedWhenVariable.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</td>
+      <td id="ziel${i+1}">${element.provenance}</td>
+      <td id="gleis${i+1}">${element.provenance}</td>
+      <td id="typ${i+1}">${element.plannedPlatform ?? 0}</td>
+      <td id="status${i+1}" class="">${(element.delay)/60 ?? 0} Minuten </td>
+    `;
+    tabelle.appendChild(tr);
+  });
+}
+
+//Tabelle --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+function stationInfoSearch(id) {
+    const tabelle = document.getElementById("tabelleInhalt");
+    tabelle.innerHTML = '';
+//IDsuche
+  fetch(`https://v6.vbb.transport.rest/stops/${id}/arrivals?duration=10`)
+      .then(response => response.json())
+      .then(data => renderTable(data))
+      .catch(error => {
+        console.error("Fehler beim Abrufen der Stationsdaten:", error);
+      });
+
+}
+
+</script>
+
+<script type="text/javascript">
+//Einstellungsbutton ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+ document.getElementById("btnAbfahrt").addEventListener("click", function() {
+  // Das Ziel-Element mit der Abfahrts-Tabelle holen:
+  const abfahrtbereich = document.getElementById("abfahrtbereich");
+  if (abfahrtbereich) {
+    abfahrtbereich.scrollIntoView({ behavior: "smooth" });
+  }
+});
+const settingsButton = document.getElementById('settings-button');
+const settingsPopup = document.getElementById('settings-popup');
+const closeBtn = settingsPopup.querySelector('.close-btn');
+const toggles = settingsPopup.querySelectorAll('.toggle-button');
+
+const settingsState = { funktionA: 1, funktionB: 1 };
+
+function togglePopup(open) {
+  if (open) {
+    settingsPopup.classList.add('open');
+    settingsPopup.setAttribute('aria-hidden', 'false');
+    toggles[0].focus();
+  } else {
+    settingsPopup.classList.remove('open');
+    settingsPopup.setAttribute('aria-hidden', 'true');
+    settingsButton.focus();
+  }
+}
+
+settingsButton.addEventListener('click', () => togglePopup(true));
+closeBtn.addEventListener('click', () => togglePopup(false));
+
+toggles.forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    const key = toggle.dataset.setting;
+    if (!key) return;
+    settingsState[key] = settingsState[key] === 1 ? 2 : 1;
+    toggle.textContent = settingsState[key]=== 2 ? "An" : "Aus";
+    toggle.classList.toggle('active', settingsState[key] === 2);
+    // Optional: Funktion hier ergänzen
+  });
+  toggle.addEventListener('keydown', e => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggle.click();
+    }
+  });
+});
+    </script>
+ 
+  </body>
+</html>
