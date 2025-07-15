@@ -9,25 +9,13 @@
   <p id="fetch"></p>
   <input id="stationInput">
   <script>
-    let stationInfoName = "S+U Berlin Hauptbahnhof"
-    function getStationIdByName(name) {
-      fetch(`https://v6.vbb.transport.rest/locations?poi=false&addresses=false&query=${encodeURIComponent(name)}`)
-        .then(response => response.json())
-        .then(data => {
-          // Finde die erste Station, die exakt zum Namen passt
-          const station = data.find(item => item.name === name);
+    fetch(`https://v6.vbb.transport.rest/stops/900013102/arrivals?duration=10'`)
+      .then(response => response.json())
+      .then(data => {console.log(data.arrivals[0].provenance)})
+      .catch(error => {
+        console.error("Fehler beim Abrufen der Stationsdaten:", error);
+      });
 
-          if (station) {
-            console.log(`${station.id}`);
-          } else {
-            console.error(`Keine Station mit dem Namen "${name}" gefunden.`);
-          }
-        })
-        .catch(error => {
-          console.error("Fehler beim Abrufen der Stationsdaten:", error);
-        });
-    }
-    getStationIdByName(stationInfoName);
 
   </script>  
 </body>
