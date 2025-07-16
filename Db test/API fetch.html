@@ -9,13 +9,15 @@
   <p id="fetch"></p>
   <input id="stationInput">
   <script>
-    fetch(`https://v6.vbb.transport.rest/stops/900013102/arrivals?duration=10'`)
-      .then(response => response.json())
-      .then(data => {console.log(data.arrivals[0].provenance)})
-      .catch(error => {
-        console.error("Fehler beim Abrufen der Stationsdaten:", error);
-      });
-
+    let stationInfoName = "S+U Berlin Hauptbahnhof"
+    function getStationIdByName(name) {
+      fetch(`https://v6.vbb.transport.rest/locations?poi=false&addresses=false&query=warschau`)
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => {
+          console.error("Fehler beim Abrufen der Stationsdaten:", error);
+        })};
+    getStationIdByName(stationInfoName);
 
   </script>  
 </body>

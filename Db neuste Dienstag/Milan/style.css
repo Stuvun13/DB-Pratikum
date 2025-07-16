@@ -399,3 +399,29 @@ nav a:focus {
 }
 
 ol{list-style: none;}
+
+.trainInfoPopUp{
+  align-items: flex;
+  text-align: left;
+  padding: 0%;
+  padding: 0 30px 30px;
+  border-radius: 6px;
+  justify-content: left;
+  width: 750px;
+  background-color: #a3a3a3;
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  visibility: hidden;
+}
+
+.popUpImg{
+  width:100%;
+  margin-top: -50px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background: #6fd649;
+  color: #fff
+}
