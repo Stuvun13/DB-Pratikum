@@ -1,0 +1,142 @@
+
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Geschichte & Technik – Deutsche Bahn</title>
+  <link rel="stylesheet" href="styleHistorie.css" />
+</head>
+<body>
+        <header>
+  <div class="container">
+    <button id="serviceBackButton" onclick="window.history.back()" aria-label="Zurück">
+  <!-- Pfeil SVG bleibt gleich -->
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+  </svg>
+  Zurück
+</button>
+    
+    <h1 class="logo">Deutsche Bahn</h1>
+    <button type="button" class="btn btn-danger" id="nav-toggle" aria-label="Navigation öffnen"></button>
+    <nav id="nav-menu" aria-label="Hauptnavigation"> 
+       <button id="settings-button" aria-label="Einstellungen öffnen" title="Einstellungen öffnen">
+  <!-- Zahnrad-Icon als SVG -->
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path d="M19.14,12.94c0.04,-0.3 0.06,-0.61 0.06,-0.94c0,-0.33 -0.02,-0.64 -0.07,-0.94l2.03,-1.58c0.18,-0.14 0.23,-0.41 0.12,-0.61l-1.92,-3.32c-0.11,-0.2 -0.36,-0.28 -0.57,-0.22l-2.39,0.96c-0.5,-0.38 -1.04,-0.7 -1.64,-0.94l-0.36,-2.54c-0.03,-0.22 -0.22,-0.39 -0.44,-0.39h-3.84c-0.22,0 -0.41,0.17 -0.44,0.39l-0.36,2.54c-0.6,0.24 -1.14,0.56 -1.64,0.94l-2.39,-0.96c-0.21,-0.08 -0.46,0.02 -0.57,0.22l-1.92,3.32c-0.11,0.2 -0.06,0.46 0.12,0.61l2.03,1.58c-0.05,0.3 -0.07,0.61 -0.07,0.94c0,0.33 0.02,0.64 0.07,0.94l-2.03,1.58c-0.18,0.14 -0.23,0.41 -0.12,0.61l1.92,3.32c0.11,0.2 0.36,0.28 0.57,0.22l2.39,-0.96c0.5,0.38 1.04,0.7 1.64,0.94l0.36,2.54c0.03,0.22 0.22,0.39 0.44,0.39h3.84c0.22,0 0.41,-0.17 0.44,-0.39l0.36,-2.54c0.6,-0.24 1.14,-0.56 1.64,-0.94l2.39,0.96c0.21,0.08 0.46,-0.02 0.57,-0.22l1.92,-3.32c0.11,-0.2 0.06,-0.46 -0.12,-0.61l-2.03,-1.58Zm-7.14,2.06c-1.66,0 -3,-1.34 -3,-3c0,-1.66 1.34,-3 3,-3c1.66,0 3,1.34 3,3c0,1.66 -1.34,3 -3,3Z"/>
+  </svg>
+</button>  
+    </nav>
+  </div>
+  <img  src="https://loghi-famosi.com/wp-content/uploads/2021/03/Logo-della-Deutsche-Bahn-650x366.png"  alt="Deutsche Bahn Logo" class="db-logo">
+</header>
+
+
+
+<h2>Geschichte & Technik der Deutschen Bahn</h2>
+
+<div class="tabs">
+  <div class="tab active" onclick="showTab('history')">Geschichte</div>
+  <div class="tab" onclick="showTab('tech')">Technik</div>
+</div>
+
+<div id="history" class="tab-content">
+  <div class="section">
+    <h3>1835 – Die Geburtsstunde der Eisenbahn in Deutschland</h3>
+    <img src="https://i.pinimg.com/originals/01/15/40/011540540c971e10fb069f5c82307049.jpg" alt="Adler-Zug" class="bilder">
+    <p>Am 7. Dezember 1835 fuhr die erste deutsche Eisenbahn zwischen Nürnberg und Fürth. Die Dampflokomotive „Adler“, importiert aus England, eröffnete eine neue Ära der Mobilität. Die Fahrt war gerade einmal 6 Kilometer lang, hatte aber symbolische Bedeutung: Der Grundstein für das spätere Streckennetz wurde gelegt.</p>
+  </div>
+
+  <div class="section">
+    <h3>1920 – Die Reichsbahn wird gegründet</h3>
+    <img src="https://th.bing.com/th/id/R.58c1757771280ddbd16092d3ab98f654?rik=hMJ5yFyEAcjEOA&riu=http%3a%2f%2fwww.railpictures.net%2fimages%2fd2%2f6%2f5%2f4%2f9654.1481059129.jpg&ehk=qdz1e2xeM9WHTR8wpCp701yVs8MmiEt3uWAXkUk4%2bcs%3d&risl=&pid=ImgRaw&r=0&adlt=strict" alt="Adler-Zug" class="bilder">
+    <p>Nach dem Ersten Weltkrieg wurden die zahlreichen Länderbahnen zur „Deutschen Reichsbahn“ zusammengelegt. Dies sollte den Bahnbetrieb effizienter gestalten. In dieser Zeit wurden viele Strecken elektrifiziert und modernisiert – ein bedeutender Schritt zur Standardisierung im Bahnverkehr.</p>
+  </div>
+
+  <div class="section">
+    <h3>1945–1990 – Teilung, Wiederaufbau und zwei Bahnen</h3>
+    <img src="bilder/adler.jpg" alt="Adler-Zug" class="bilder">
+    <p>Nach dem Zweiten Weltkrieg wurde Deutschland geteilt – und damit auch das Bahnnetz. In Westdeutschland entstand die Deutsche Bundesbahn, in der DDR die Deutsche Reichsbahn. Beide entwickelten sich unterschiedlich: Während die Bundesbahn neue Züge entwickelte, fuhr im Osten vieles noch mit Dampfkraft.</p>
+  </div>
+
+  <div class="section">
+    <h3>1994 – Die Deutsche Bahn AG entsteht</h3>
+    <img src="bilder/adler.jpg" alt="Adler-Zug" class="bilder">
+    <p>Nach der Wiedervereinigung wurde 1994 die Deutsche Bahn AG gegründet – als Zusammenschluss der Reichsbahn (Ost) und der Bundesbahn (West). Seitdem entwickelt sich die DB zu einem europaweiten Mobilitätsanbieter mit Fokus auf Digitalisierung und Hochgeschwindigkeit.</p>
+  </div>
+
+  <div class="section">
+    <h3>2002 – Der ICE 3 und das Hochgeschwindigkeitszeitalter</h3>
+    <img src="bilder/adler.jpg" alt="Adler-Zug" class="bilder">
+    <p>Mit dem ICE 3 und der Neubaustrecke Köln–Rhein/Main wurden erstmals dauerhaft Geschwindigkeiten von über 300 km/h im Regelbetrieb erreicht. Die Züge sind aerodynamisch optimiert, vollelektronisch gesteuert und auf Komfort ausgelegt – inkl. WLAN, Bordrestaurant und mehr.</p>
+  </div>
+</div>
+
+<div id="tech" class="tab-content" style="display: none;">
+  <div class="section">
+    <h3>Moderne Zugtechnik</h3>
+    <img src="bilder/adler.jpg" alt="Adler-Zug" class="bilder">
+    <p>Die heutigen ICE-Züge sind Hochleistungsmaschinen mit E-Antrieben, die bis zu 8.000 kW leisten. Sie bestehen aus Leichtbau-Aluminium, verfügen über regenerative Bremssysteme und moderne Steuerungstechnik. Auch der Fahrkomfort wurde stetig verbessert: Geräuschdämmung, Fahrstabilität und Servicequalität sind auf Spitzenniveau.</p>
+  </div>
+
+  <div class="section">
+    <h3>Signal- und Sicherheitstechnik</h3>
+    <img src="bilder/adler.jpg" alt="Adler-Zug" class="bilder">
+    <p>Die Bahn nutzt heute elektronische Stellwerke (ESTW), die mehrere Bahnhöfe zentral steuern. Das European Train Control System (ETCS) löst nach und nach klassische Lichtsignale ab und ermöglicht halbautomatisierten Zugbetrieb. Diese Systeme steigern sowohl Sicherheit als auch Effizienz.</p>
+  </div>
+
+  <div class="section">
+    <h3>Oberleitung und Energieversorgung</h3>
+    <img src="bilder/adler.jpg" alt="Adler-Zug" class="bilder">
+    <p>Die Deutsche Bahn betreibt ein eigenes Stromnetz mit 16,7 Hz Wechselstrom. Züge werden über Oberleitungen gespeist, während Umformerwerke den Bahnstrom aus dem öffentlichen Netz umwandeln. Immer mehr Energie stammt dabei aus erneuerbaren Quellen – die DB strebt an, bis 2038 vollständig klimaneutral zu fahren.</p>
+  </div>
+
+  <div class="section">
+    <h3>Digitale Zukunft: Automatisiertes Fahren & SmartRail</h3>
+    <img src="bilder/adler.jpg" alt="Adler-Zug" class="bilder">
+    <p>Projekte wie „Digitale Schiene Deutschland“ setzen auf KI-gesteuertes Zugmanagement, Sensorik und Echtzeit-Überwachung. Ziel ist es, die Netzkapazität zu erhöhen, Verspätungen zu minimieren und mehr Verkehr auf die Schiene zu bringen – bei gleichzeitiger CO₂-Reduktion.</p>
+  </div>
+</div>
+
+<div id="settings-popup" aria-hidden="true" role="dialog" aria-label="Einstellungen">
+  <br><br> <br> 
+  <button class="close-btn" aria-label="Einstellungen schließen">&times;</button>
+  <hr>
+  <div class="setting">
+    <div class="setting-label"><b>Dunkelmudus</b></div>
+    <div class="toggle-button" data-setting="funktionA" tabindex="0" onclick="toggleStyle(this)">1</div>
+  </div>
+</div>
+
+<div id="settings-popup" aria-hidden="true" role="dialog" aria-label="Einstellungen">
+  <br><br> <br> 
+  <button class="close-btn" aria-label="Einstellungen schließen">&times;</button>
+ <hr>
+  <div class="setting">
+       <div class="setting-label"><b>Dunkelmudus</b></div>
+    <div class="toggle-button" data-setting="funktionA" tabindex="0" onclick="toggleStyle(this)">1</div>
+  </div>
+
+  <div class="setting">
+    <div class="setting-label"><b></b></div>
+    <div class="toggle-button" data-setting="funktionB" tabindex="0">1</div>
+  </div>
+  <div class="setting">
+    <div class="setting-label">Funktion 2</div>
+    <div class="toggle-button" data-setting="funktionA" tabindex="0">1</div>
+  </div>
+
+  <div class="setting">
+    <div class="setting-label">Funktion 3</div>
+    <div class="toggle-button" data-setting="funktionB" tabindex="0">1</div>
+  </div>
+</div>
+
+<script src="scrpipt.js" defer></script>
+
+
+
+</body>
+</html>
