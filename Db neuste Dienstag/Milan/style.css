@@ -229,20 +229,6 @@ nav a:focus {
   margin: auto;
 
 }
-
-.search-div {
-  background-color: #ffffff;
-  position: absolute;
-  z-index: 1;
-  cursor: pointer;
-}
-
-.table-div {
-  position: relative;
-  top: 64px;
-}
-
-ol{list-style: none;}
 #hauptmenu {
   height: 800px;
   background: url('https://railway-news.com/wp-content/uploads/2021/01/Siemens-Mobility-ICE-4-DB-rendering.jpg') center center / cover no-repeat;
@@ -398,3 +384,18 @@ ol{list-style: none;}
   height: 18px;
   fill: white;
 }
+
+
+.search-div {
+  background-color: #ffffff;
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.table-div {
+  position: relative;
+  top: 64px;
+}
+
+ol{list-style: none;}

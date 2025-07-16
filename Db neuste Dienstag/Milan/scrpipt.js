@@ -41,38 +41,53 @@
         };
     });
 
-    function renderTable(data) {
+    function renderTable(arrivalsData2, departuresData2) {
       const tabelle = document.getElementById("tabelleInhalt");
+      const maxLength = Math.max(arrivalsData2.length, departuresData2.length);
 
-      data.arrivals.forEach((element, i) => {
+      for (let i = 0; i < maxLength; i++) {
+
         const tr = document.createElement("tr");
         tr.className = 'tableInfoId';
-        let plannedWhenVariable = new Date(element.plannedWhen);
+        let arrivalWhenVariable = new Date(arrivalsData2[i].plannedWhen);
+        let departurelWhenVariable = new Date(departuresData2[i].plannedWhen);
+
+
         tr.innerHTML = `
-          <td id="zug${i+1}">${element.line.name}</td>
-          <td id="zeit${i+1}">${plannedWhenVariable.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</td>
-          <td id="ziel${i+1}">${element.provenance}</td>
-          <td id="gleis${i+1}">${element.provenance}</td>
-          <td id="typ${i+1}">${element.plannedPlatform ?? 0}</td>
-          <td id="status${i+1}" class="">${(element.delay)/60 ?? 0} Minuten </td>
-        `;
+          <td>${arrivalsData2[i].line.name}</td>
+          <td>${arrivalWhenVariable.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</td>
+          <td>${departurelWhenVariable.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</td>
+          <td>${arrivalsData2[i].provenance}</td>
+          <td>${arrivalsData2[i].plannedPlatform ?? 0}</td>
+          <td>${(arrivalsData2[i].delay)/60 ?? 0} Minuten</td>        `;
+
         tabelle.appendChild(tr);
-      });
+      }
+
     }
+
 
 //Tabelle --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     function stationInfoSearch(id) {
-        const tabelle = document.getElementById("tabelleInhalt");
-        tabelle.innerHTML = '';
-    //IDsuche
-      fetch(`https://v6.vbb.transport.rest/stops/${id}/arrivals?duration=10`)
-          .then(response => response.json())
-          .then(data => renderTable(data))
-          .catch(error => {
-            console.error("Fehler beim Abrufen der Stationsdaten:", error);
-          });
+      const tabelle = document.getElementById("tabelleInhalt");
+      tabelle.innerHTML = '';
 
+      // Arrivals laden
+      fetch(`https://v6.vbb.transport.rest/stops/${id}/departures?duration=10`)
+        .then(response => response.json())
+        .then(departureData => {
+          // Danach: Departures laden
+          fetch(`https://v6.vbb.transport.rest/stops/${id}/arrivals?duration=10`)
+            .then(response => response.json())
+            .then(arrivalData => {
+              renderTable(arrivalData.arrivals, departureData.departures);
+            })
+            .catch(error => console.error("Fehler beim Abrufen der Abfahrtsdaten:", error));
+        })
+        .catch(error => console.error("Fehler beim Abrufen der Ankunftsdaten:", error));
     }
+
+
 //Einstellungsbutton ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     document.getElementById("btnAbfahrt").addEventListener("click", function() {
       // Das Ziel-Element mit der Abfahrts-Tabelle holen:

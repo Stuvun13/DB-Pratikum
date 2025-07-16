@@ -397,3 +397,17 @@ ol {
   height: 18px;
   fill: white;
 }
+
+.search-div {
+  background-color: #ffffff;
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.table-div {
+  position: relative;
+  top: 64px;
+}
+
+ol{list-style: none;}
