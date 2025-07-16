@@ -15,31 +15,6 @@
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin="">
     var map = L.map('map').setView([51.505, -0.09], 13);
-    var marker = L.marker([51.5, -0.09]).addTo(map);
-    var circle = L.circle([51.508, -0.11], {
-    color: 'red',
-    fillColor: '#f03',
-    fillOpacity: 0.5,
-    radius: 500
-}).addTo(map);
-    var polygon = L.polygon([
-    [51.509, -0.08],
-    [51.503, -0.06],
-    [51.51, -0.047]
-]).addTo(map);
-marker.bindPopup("<b>:)</b><br>TEEEEST").openPopup();
-circle.bindPopup("Hallo");
-polygon.bindPopup("I am not a polygon.");
-    var greenIcon = L.icon({
-    iconUrl: 'leaf-green.png',
-    shadowUrl: 'leaf-shadow.png',
-
-    iconSize:     [38, 95], 
-    shadowSize:   [50, 64], 
-    iconAnchor:   [22, 94], 
-    shadowAnchor: [4, 62],  
-    popupAnchor:  [-3, -76] 
-});
 </script>
  <div id="map"></div>
 </html>
