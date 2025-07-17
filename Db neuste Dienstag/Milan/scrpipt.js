@@ -41,7 +41,8 @@
         };
     });
 
-    function renderTable(arrivalsData2, departuresData2) {
+
+    function renderTable(arrivalsData2, departuresData2, tempIdForPopUp) {
       const tabelle = document.getElementById("tabelleInhalt");
       const maxLength = Math.max(arrivalsData2.length, departuresData2.length);
 
@@ -49,14 +50,11 @@
 
         const tr = document.createElement("tr");
         tr.className = 'tableInfoId';
-        let arrivalWhenVariable = new Date(arrivalsData2[i].plannedWhen);
-        let departurelWhenVariable = new Date(departuresData2[i].plannedWhen);
-
 
         tr.innerHTML = `
-          <td>${arrivalsData2[i].line.name}</td>
-          <td>${arrivalWhenVariable.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</td>
-          <td>${departurelWhenVariable.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</td>
+          <td><a onclick="fillPopUpWithContent(${i}, ${tempIdForPopUp})">${arrivalsData2[i].line.name}</a></td>
+          <td>${new Date(arrivalsData2[i].plannedWhen).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</td>
+          <td>${new Date(departuresData2[i].plannedWhen).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</td>
           <td>${arrivalsData2[i].provenance}</td>
           <td>${arrivalsData2[i].plannedPlatform ?? 0}</td>
           <td>${(arrivalsData2[i].delay)/60 ?? 0} Minuten</td>        `;
@@ -64,8 +62,48 @@
         tabelle.appendChild(tr);
       }
 
+    
     }
+    /*const autoRefreshStationTable = ({ dataFunction, onComplete, interval = 30000}) => {
+      const execute = () => {
+        dataFunction().then(data => {
+          onComplete(data);
+        });
+      };
 
+      execute();
+    };
+
+    autoRefreshStationTable({
+      dataFunction: stationInfoSearch,
+      onComplete: renderTable,
+      interval: 2000,
+    });*/
+
+    function fillPopUpWithContent(klickNum, popUpId) {
+      document.getElementById('stationInput').addEventListener('input', (event) => {
+          if ('stationInput' != '') {
+              fetch(("https://v6.vbb.transport.rest/locations?poi=false&addresses=false&query=") + (event.target.value))
+                  .then(response => response.json())
+                  .then(data => popUpId = data)
+                  .catch(error => console.error(error));
+          };
+      })
+
+
+      fetch(`https://v6.vbb.transport.rest/stops/${popUpId}/arrivals?duration=10`)
+        .then(response => response.json())
+        .then(data => 
+          console.log(data.arrivals[klickNum],
+          /*document.getElementById('fahrzeug-Nummer').innerText = `Information über: ${45}`,
+          document.getElementById('herkunft').innerText = `Kommt von: ${1}`,
+          document.getElementById('fahrzeug-art').innerText = `Fahrzeug-Art: ${2}`,
+          document.getElementById('fahrzeug-id').innerText = `Fahrzeug-ID: ${3}`,
+          document.getElementById('fahrzeug-position').innerText = `Position: X: ${4} | Y: ${5}`,
+          document.getElementById('id').innerText = '22'*/
+          ))
+        .catch(error => {console.error("Fehler beim Abrufen der Stationsdaten:", error);})
+  };
 
 //Tabelle --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     function stationInfoSearch(id) {
@@ -80,13 +118,15 @@
           fetch(`https://v6.vbb.transport.rest/stops/${id}/arrivals?duration=10`)
             .then(response => response.json())
             .then(arrivalData => {
-              renderTable(arrivalData.arrivals, departureData.departures);
+                renderTable(arrivalData.arrivals, departureData.departures, id);
             })
             .catch(error => console.error("Fehler beim Abrufen der Abfahrtsdaten:", error));
         })
         .catch(error => console.error("Fehler beim Abrufen der Ankunftsdaten:", error));
     }
 
+//PopUpButtons ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    let popup = document.getElementById('popup') 
 
 //Einstellungsbutton ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
     document.getElementById("btnAbfahrt").addEventListener("click", function() {

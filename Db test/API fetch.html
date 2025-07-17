@@ -9,16 +9,37 @@
   <p id="fetch"></p>
   <input id="stationInput">
   <script>
-    let stationInfoName = "S+U Berlin Hauptbahnhof"
-    function getStationIdByName(name) {
-      fetch(`https://v6.vbb.transport.rest/locations?poi=false&addresses=false&query=warschau`)
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => {
-          console.error("Fehler beim Abrufen der Stationsdaten:", error);
-        })};
-    getStationIdByName(stationInfoName);
+    fetch(`https://v6.vbb.transport.rest/stops/900017101/arrivals?duration=10`)
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => {
+        console.error("Fehler beim Abrufen der Stationsdaten:", error);
+      });
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      document.getElementById('stationInput').addEventListener('input', (event) => {
+        fetch(("https://v6.vbb.transport.rest/locations?poi=false&addresses=false&query=") + (event.target.value))
+            .then(response => response.json())
+            .then(data => (data))
+            .catch(error => console.error(error));})
   </script>  
 </body>
 </html>

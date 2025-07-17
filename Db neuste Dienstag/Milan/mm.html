@@ -96,14 +96,18 @@
         </table>
       </div>
     </div>
-    <button type="submit" onclick="trainInfoPopUpDisplayButton()">POPUP</button>
-    <div class="trainInfoPopUp" id="popup">
-      <img src="pfirsich.png" class="popUpImg"></img>
-      <h2>Welcome to the 18+ teens site</h2>
+    <button type="submit" onclick="popup.classList.remove('open-popup'), popup.classList.add('open-popup')">POPUP</button>
+    <div role="dialog" class="trainInfoPopUp" id="popup">
+      <img src="db-popup-logo.png" class="popUpImg"></img>
+      <button class="trainInfoPopUpButton" onclick="popup.classList.remove('open-popup');">&times;</button>
+      <h4>Information über: ERROR</h4>
+      <ul>
+        <li id='herkunft'>Kommt von: Null</li>
+        <li id='fahrzeug-art'>Fahrzeug-Art: Null</li>
+        <li id='fahrzeug-id'>Fahrzeug-ID: 0</li>
+        <li id='fahrzeug-position'>Position: X: 0 | Y: 0</li>
+      </ul>
       <br>
-      <p>sign up for free fuck</p>
-      <br>
-      <button class="trainInfoPopUpButton" onclick="trainInfoPopUpHideButton()">Free Nudes</button>
     </div>
   </section>
   <br>
@@ -123,9 +127,10 @@
           width:400px; 
       }
       </style>
-
+  <div id ="map">
+  
+  </div>
   <script>
-  <div id = "map"></div>
       
     let map = L.map('map').setView([52.516266, 13.2 ], 7.25);
       L.tileLayer('https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=T4SqVefA9uEMClo4NGL2', {
