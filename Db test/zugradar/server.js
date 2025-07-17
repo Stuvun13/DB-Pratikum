@@ -4,7 +4,7 @@ const createClient = require('hafas-client');
 const { profile: bahnProfile } = require('@derhuerst/hafas-client-bahn');
 
 const app = express();
-const port = 3000;
+const port = 5500;
 
 const client = createClient(bahnProfile, 'zugradar-demo');
 

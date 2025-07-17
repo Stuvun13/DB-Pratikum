@@ -6,45 +6,59 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <style>
-        #map { height: 90vh; width: 100%; }
+        #map { height: 92vh; width: 100%; }
     </style>
 </head>
 <body>
     <h2>Zugpositionen (live)</h2>
     <div id="map"></div>
 
-    <script>
-        const map = L.map('map').setView([52.52, 13.4], 12);
+<script>
+    const map = L.map('map').setView([52.52, 13], 9);
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© OpenStreetMap-Mitwirkende'
-        }).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap-Mitwirkende'
+    }).addTo(map);
 
-        let zugMarker = [];
+    let zugMarker = [];
 
-        async function ladeZugPositionen() {
-            const res = await fetch('http://localhost:3000/zug-positionen');
-            const data = await res.json();
+    const zugIcon = L.icon({
+        iconUrl: 'S-Bahn-bg.png',
+        iconSize: [32, 32],
+        iconAnchor: [16, 16],
+        popupAnchor: [0, -16]
+    });
 
-            zugMarker.forEach(marker => map.removeLayer(marker)); // alte Marker löschen
-            zugMarker = [];
+    async function ladeZugPositionen() {
+        const res = await fetch('https://v6.vbb.transport.rest/stops/900017101')
+                            .then(response => response.json())
+                            .then(data => console.log(`${data.location.latitude}` +" " + `${data.location.longitude}`))
+                            .catch(error => console.error(error));
+        const data = await res.json();
 
-            for (const zug of data) {
-                if (zug.location && zug.line) {
-                    const marker = L.marker([zug.location.latitude, zug.location.longitude])
-                        .bindPopup(`${zug.line.name} Richtung ${zug.direction}`);
-                    marker.addTo(map);
-                    zugMarker.push(marker);
-                }
+        zugMarker.forEach(marker => map.removeLayer(marker));
+        zugMarker = [];
+
+        for (const zug of data) {
+            if (zug.location && zug.line) {
+                const marker = L.marker(
+                    [zug.location.latitude, zug.location.longitude],
+                    { icon: zugIcon }
+                ).bindPopup(`${zug.line.name} Richtung ${zug.direction}`);
+
+                marker.addTo(map);
+                zugMarker.push(marker);
             }
         }
+    }
 
-        ladeZugPositionen();
-        setInterval(ladeZugPositionen, 5000); // alle 5 Sekunden aktualisieren
+    ladeZugPositionen();
+    setInterval(ladeZugPositionen, 3000);
 
-        let lat1 = 60
-        let lng1 = 50
+        let lat1 = (52.52)
+        let lng1 = (13.4)
         L.marker([lat1, lng1]).addTo(map)
+
     </script>
 </body>
 </html>
