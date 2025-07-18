@@ -1,0 +1,62 @@
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Zugradar</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map { height: 92vh; width: 100%; }
+    </style>
+</head>
+<body>
+    <h2>Zugpositionen (live)</h2>
+    <div id="map"></div>
+
+<script>
+    const map = L.map('map').setView([52.52, 13], 9);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap-Mitwirkende'
+    }).addTo(map);
+
+    let zugMarker = [];
+
+    const zugIcon = L.icon({
+        iconUrl: 'S-Bahn-bg.png', 
+        iconSize: [38, 95],
+        iconAnchor: [22, 94]
+    });
+
+    async function ladeZugPositionen() {
+        try {
+            const res = await fetch('API');     //API Einfügen
+            const data = await res.json();
+            console.log(data); 
+
+            zugMarker.forEach(marker => map.removeLayer(marker));
+            zugMarker = [];
+
+            if (data.location) {
+                const marker = L.marker(
+                    [data.location.latitude, data.location.longitude],
+                    { icon: zugIcon }
+                ).bindPopup(data.name);
+
+                marker.addTo(map);
+                zugMarker.push(marker);
+            }
+        } catch (error) {
+            console.error("Fehler beim Laden der Daten:", error);
+        }
+    }
+
+    ladeZugPositionen();
+    setInterval(ladeZugPositionen, 3000);
+
+        let lat1 = (52.52)
+        let lng1 = (13.4)
+        L.marker([lat1, lng1]).addTo(map)
+
+    </script>
+</body>
+</html>
