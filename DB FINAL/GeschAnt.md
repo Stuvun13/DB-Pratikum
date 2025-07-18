@@ -1,0 +1,2 @@
+Die Geschwindigkeit des Zuges kann nur geschätzt werden, da sie nicht in Echtzeit messbar ist – es gibt immer eine zeitliche Verzögerung zwischen Messung und Anzeige. Sensoren wie GPS oder Achszähler liefern nur Näherungswerte, die zudem durch äußere Einflüsse verfälscht sein können. Die angezeigte Geschwindigkeit basiert daher auf Rechenmodellen und kombinierten Datenquellen, wodurch sie zwangsläufig nur eine Schätzung darstellt. Zusätzlich stehen in der Benutzeroberfläche meist nicht alle technischen Echtzeitdaten zur Verfügung.
+ 
