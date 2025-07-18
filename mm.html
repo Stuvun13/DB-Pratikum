@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <link id="stylesheet" rel="stylesheet" href="./style.css" type="text/css"/>
+    <title>Deutsche Bahn Abfahrtzeiten</title>
+ 
+    <!-- Bootstrap ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+   <script src="scrpipt.js" defer></script>
+   <!--Karte-------------------->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        #map { height: 22vh; width: 100%; }
+    </style>
+  </head>
+  <body> 
+    
+ <!-- Header -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+
+    <header>
+  <div class="container">
+    
+    <h1 class="logo">Deutsche Bahn</h1>
+    <button type="button" class="btn btn-danger" id="nav-toggle" aria-label="Navigation öffnen"></button>
+    <nav id="nav-menu" aria-label="Hauptnavigation"> 
+      <ul> 
+        <li><a href="#hauptmenu">Hauptmenü</a></li>
+        <li><a href="#abfahrtbereich">Bahnhofssuche</a></li>
+        <li><a href="#Verbindungen">Verbindungen</a></li>
+        <li><a href="#Service">Tickets</a></li>
+       <button id="settings-button" aria-label="Einstellungen öffnen" title="Einstellungen öffnen">
+  <!-- Zahnrad-Icon als SVG -->
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+    <path d="M19.14,12.94c0.04,-0.3 0.06,-0.61 0.06,-0.94c0,-0.33 -0.02,-0.64 -0.07,-0.94l2.03,-1.58c0.18,-0.14 0.23,-0.41 0.12,-0.61l-1.92,-3.32c-0.11,-0.2 -0.36,-0.28 -0.57,-0.22l-2.39,0.96c-0.5,-0.38 -1.04,-0.7 -1.64,-0.94l-0.36,-2.54c-0.03,-0.22 -0.22,-0.39 -0.44,-0.39h-3.84c-0.22,0 -0.41,0.17 -0.44,0.39l-0.36,2.54c-0.6,0.24 -1.14,0.56 -1.64,0.94l-2.39,-0.96c-0.21,-0.08 -0.46,0.02 -0.57,0.22l-1.92,3.32c-0.11,0.2 -0.06,0.46 0.12,0.61l2.03,1.58c-0.05,0.3 -0.07,0.61 -0.07,0.94c0,0.33 0.02,0.64 0.07,0.94l-2.03,1.58c-0.18,0.14 -0.23,0.41 -0.12,0.61l1.92,3.32c0.11,0.2 0.36,0.28 0.57,0.22l2.39,-0.96c0.5,0.38 1.04,0.7 1.64,0.94l0.36,2.54c0.03,0.22 0.22,0.39 0.44,0.39h3.84c0.22,0 0.41,-0.17 0.44,-0.39l0.36,-2.54c0.6,-0.24 1.14,-0.56 1.64,-0.94l2.39,0.96c0.21,0.08 0.46,-0.02 0.57,-0.22l1.92,-3.32c0.11,-0.2 0.06,-0.46 -0.12,-0.61l-2.03,-1.58Zm-7.14,2.06c-1.66,0 -3,-1.34 -3,-3c0,-1.66 1.34,-3 3,-3c1.66,0 3,1.34 3,3c0,1.66 -1.34,3 -3,3Z"/>
+  </svg>
+</button>  
+    </nav>
+  </div>
+  <img  src="https://loghi-famosi.com/wp-content/uploads/2021/03/Logo-della-Deutsche-Bahn-650x366.png"  alt="Deutsche Bahn Logo" class="db-logo">
+</header>
+     
+ 
+<!-- Hauptmenü mit Hintergrundbild ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<section id="hauptmenu" class="position-relative text-white d-flex align-items-center">
+
+  <!-- Overlay für dunklen Effekt (optional für bessere Lesbarkeit) -->
+  <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0,0,0,0.5);"></div>
+ 
+  <!-- Inhalt zentriert -->
+  <div class="container position-relative text-center">
+    <div class="bg-dark bg-opacity-75 p-4 rounded">
+      <h1 class="mb-3">Willkommen bei der Deutschenbahn</h1>
+      <p class="mb-4 fs-5">Plane deine Reise mit aktuellen Zugabfahrten</p>
+      <button id="btnAbfahrt" class="button-db">Abfahrtzeiten anzeigen</button>
+    </div>
+  </div>
+</section>
+<hr>
+
+<!---einstellungs Popup-->
+<div id="settings-popup" aria-hidden="true" role="dialog" aria-label="Einstellungen">
+  <br><br> <br> 
+  <button class="close-btn" aria-label="Einstellungen schließen">&times;</button>
+ <hr>
+  <div class="setting">
+       <div class="setting-label"><b>Dunkelmudus</b></div>
+<button id="theme-switch">
+ <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Z"/></svg>
+ <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg> 
+</div>
+
+
+  <div class="setting">
+    <div class="setting-label"><b></b></div>
+    <div class="toggle-button" data-setting="funktionB" tabindex="0">1</div>
+  </div>
+  <div class="setting">
+    <div class="setting-label">Funktion 2</div>
+    <div class="toggle-button" data-setting="funktionA" tabindex="0">1</div>
+  </div>
+
+  <div class="setting">
+    <div class="setting-label">Funktion 3</div>
+    <div class="toggle-button" data-setting="funktionB" tabindex="0">1</div>
+  </div>
+</div>
+
+<div class="sc">
+  <!-- Tabelle --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+  <section id="abfahrtbereich" class="my-5">
+    <h2>Verbindungen:</h2>
+    <div class="container my-5" class = "table-search-div" id="abfahrtbereich">
+      <div class = 'search-div'>
+        <input id="stationInput" type="text" class="form-control">
+        <ol id = "stationsName" id="abfahrtbereich" class="mb-4"></ol>
+      </div>
+      <div class = "table-div">
+        <table class="table table-striped table-bordered">
+          <thead class="table-light">
+              <tr>
+                <th>Bahnlinie</th><th>Anknuft</th><th>Abfahrt</th><th>Richtung</th><th>Gleis</th><th>Verspätung</th>
+              </tr>
+            <tbody id="tabelleInhalt"></tbody>
+          </thead>
+        </table>
+      </div>
+    </div>
+    <div id='popUpBackGround' class='popUpBackGround' onclick="popup.classList.remove('open-popup'), popUpBackGround.classList.remove('open-popup');"></div>
+    <div role="dialog" class="trainInfoPopUp" id="popup">
+      <div id='popUpPicture'>S</div>
+      <button class="trainInfoPopUpButton" onclick="popup.classList.remove('open-popup'), popUpBackGround.classList.remove('open-popup'), tablePopup(), fillPopUpMapWithMarker(0, 0);">&times;</button>
+      <h4 id='fahrzeug-Nummer'></h4>
+      <li id='herkunft'></li>
+      <li id='fahrzeug-art'></li>
+      <li id='betreiber'> </li>
+      <li id='fahrt-num'></li>
+      <li id='fahrzeug-id'></li>
+      <li id='trip-id'></li>
+      <li id='fahrzeug-position'></li>
+      <li id='ds-Tempo'></li>
+      <li id='warning'></li>
+      <br>
+      <div id="map"></div>
+    </div>
+  </section>
+  <br>
+  <br>
+  <hr>
+  <footer class="footer">
+    <div class="footer-content">
+
+      <!-- Linke Seite: Text und Links als zwei Blöcke -->
+      <div class="footer-left">
+        <span class="footer-text">Wir hoffen, wir konnten Ihnen weiterhelfen.</span>
+        <ul class="footer-links">
+          <li><a href="#">Startseite</a></li>
+          <li><a href="#">Kontakt</a></li>
+          <li><a href="#">Impressum</a></li>
+          <li><a href="#">Datenschutz</a></li>
+        </ul>
+      </div>
+
+      <!-- Rechte Seite: Text + Icons -->
+      <div class="footer-right">
+        <span>Folgen sie uns auf:</span>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/DBPersonenverkehr/" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+          </a>
+          <a href="https://instagram.com" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+          </a>
+          <a href="https://wa.me/491234567890" target="_blank">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp">
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+ 
+  </body>
+  <script src="scrpipt.js" defer></script>
+
+</html>
